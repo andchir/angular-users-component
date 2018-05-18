@@ -1,7 +1,3 @@
-/**
- * System configuration for Angular samples
- * Adjust as necessary for your application needs.
- */
 (function (global) {
     System.config({
         paths: {
@@ -50,9 +46,7 @@
             'rxjs/operators': {main: 'index.js', defaultExtension: 'js'},
             'rxjs/testing': {main: 'index.js', defaultExtension: 'js'},
             'rxjs/websocket': {main: 'index.js', defaultExtension: 'js'},
-            'rxjs': {main: 'index.js', defaultExtension: 'js'},
-            'core-js': {},
-            'zone.js': {}
+            'rxjs': {main: 'index.js', defaultExtension: 'js'}
         }
     });
 })(this);
