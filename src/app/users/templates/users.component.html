@@ -1,30 +1,48 @@
 <table class="table">
     <thead>
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
-    </tr>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Ф.И.О.</th>
+            <th scope="col">Адрес эл. почты</th>
+            <th scope="col">Телефон</th>
+            <th scope="col">Город</th>
+            <th scope="col">Дата рождения</th>
+        </tr>
     </thead>
     <tbody>
-    <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-    </tr>
-    <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-    </tr>
-    <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-    </tr>
+        <tr *ngFor="let item of items">
+            <th>
+                {{item.id.value}}
+            </th>
+            <td>
+                {{item.name.title}} {{item.name.first}} {{item.name.last}}
+            </td>
+            <td>
+                {{item.email}}
+            </td>
+            <td>
+                {{item.phone}}
+            </td>
+            <td>
+                {{item.location.city}}
+            </td>
+            <td>
+                {{item.dob | date}}
+            </td>
+        </tr>
     </tbody>
 </table>
+
+<div class="float-right">
+    <select class="form-control" [(ngModel)]="pageOptions.pageSize" (ngModelChange)="onChangePageSize()">
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="30">30</option>
+    </select>
+</div>
+
+<pagination
+        [totalItems]="pageOptions.totalItems"
+        [page]="pageOptions.page"
+        [pageSize]="pageOptions.pageSize"
+        (pageChanged)="onChangePage($event)"></pagination>
