@@ -9,7 +9,12 @@ module.exports = {
     entry: {
         'polyfills': './src/polyfills.ts',
         'vendor': './src/vendor.ts',
-        'app': './src/main.ts'
+        'app': './src/main.ts',
+        'vendor_styles': [
+            './node_modules/bootstrap/dist/css/bootstrap.min.css',
+            './node_modules/primeng/resources/primeng.min.css',
+            './node_modules/primeng/resources/themes/omega/theme.css'
+        ]
     },
 
     resolve: {
@@ -66,13 +71,12 @@ module.exports = {
         }),
 
         new HtmlWebpackPlugin({
+            inject: false,
             filename: '../index.html',
             template: 'src/index.html',
             title: APP_COMMON_CONFIG.title,
             description: APP_COMMON_CONFIG.title,
-            meta: {
-                baseUrl: APP_COMMON_CONFIG.baseUrl
-            }
+            baseUrl: APP_COMMON_CONFIG.baseUrl
         })
     ]
 };

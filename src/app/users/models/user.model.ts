@@ -1,5 +1,11 @@
 export class User {
 
+    /**
+     * Get user value for filter
+     * @param filterName
+     * @param item
+     * @returns {string}
+     */
     static getValueForFilter(filterName: string, item: User): string {
         let value = '';
         switch (filterName) {

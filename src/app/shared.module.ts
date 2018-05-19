@@ -1,7 +1,9 @@
-import {Component, NgModule} from '@angular/core';
+import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
+import {CalendarModule} from 'primeng/calendar';
 
 import {PaginationComponent} from './components/pagination.component';
 
@@ -15,7 +17,9 @@ const components: any[] = [
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        HttpClientModule
+        NoopAnimationsModule,
+        HttpClientModule,
+        CalendarModule
     ],
     declarations: [
         ...components
@@ -27,7 +31,9 @@ const components: any[] = [
         ...components,
         CommonModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NoopAnimationsModule,
+        CalendarModule
     ]
 })
 export class SharedModule {

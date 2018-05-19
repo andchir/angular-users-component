@@ -21,7 +21,7 @@ export class UsersComponent implements OnInit {
         lastName: '',
         phone: '',
         city: '',
-        dateOfBirth: ''
+        dateOfBirth: null as Date[]|null
     };
     filtersTimer: any;
 
@@ -56,12 +56,19 @@ export class UsersComponent implements OnInit {
         this.items = this.filteredData.slice(currentPos, currentPos + this.pageOptions.pageSize);
     }
 
+    /**
+     * On change page size
+     */
     onChangePageSize(): void {
         this.pageOptions.pageSize = parseInt(String(this.pageOptions.pageSize));
         this.pageOptions.page = 1;
         this.loadItems();
     }
 
+    /**
+     * On change page
+     * @param page
+     */
     onChangePage(page: number): void {
         this.pageOptions.page = page;
         this.loadItems();
@@ -107,15 +114,22 @@ export class UsersComponent implements OnInit {
         return result;
     }
 
+    /**
+     * Update filters
+     */
     filtersUpdate(): void {
         clearTimeout(this.filtersTimer);
         this.filtersTimer = setTimeout(() => {
+            console.log('filtersUpdate', this.filters);
             this.pageOptions.page = 1;
             this.filterItems(this.data);
             this.loadItems();
         }, 700);
     }
 
+    /**
+     * Clear filters
+     */
     filtersClear(): void {
         for (let name in this.filters) {
             if (this.filters.hasOwnProperty(name)) {

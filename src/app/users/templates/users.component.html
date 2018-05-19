@@ -54,7 +54,8 @@
                         </span>
                     </span>
                 </div>
-                <input type="text" class="form-control">
+                <!--<input type="text" class="form-control">-->
+                <p-calendar [(ngModel)]="filters.dateOfBirth" [selectionMode]="'range'" (ngModelChange)="filtersUpdate()"></p-calendar>
             </div>
 
         </div>
