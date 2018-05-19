@@ -3,6 +3,8 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var helpers = require('./helpers');
 
+const APP_COMMON_CONFIG = require('./config.common.json');
+
 module.exports = {
     entry: {
         'polyfills': './src/polyfills.ts',
@@ -53,8 +55,8 @@ module.exports = {
     plugins: [
         // Workaround for angular/angular#11580
         new webpack.ContextReplacementPlugin(
-            // The (\\|\/) piece accounts for path separators in *nix and Windows
-            /angular(\\|\/)core(\\|\/)@angular/,
+            // The (\\|\/) piece accounts for path separators for Windows and MacOS
+            /(.+)?angular(\\|\/)core(.+)?/,
             helpers.root('./src'), // location of your src
             {} // a map of your routes
         ),
@@ -64,9 +66,13 @@ module.exports = {
         }),
 
         new HtmlWebpackPlugin({
+            filename: '../index.html',
             template: 'src/index.html',
-            baseUrl: '/dist/',
-            title: 'Angular Users App Sample'
+            title: APP_COMMON_CONFIG.title,
+            description: APP_COMMON_CONFIG.title,
+            meta: {
+                baseUrl: APP_COMMON_CONFIG.baseUrl
+            }
         })
     ]
 };

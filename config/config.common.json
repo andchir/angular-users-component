@@ -1,4 +1,5 @@
 {
-  "title": "Angular Users Component",
-  "description": "Sample Angular 6 component and WebPack setup"
+  "title": "Angular Users App Sample",
+  "description": "Sample Angular 6 component and WebPack setup",
+  "baseUrl": "/"
 }
