@@ -4,7 +4,7 @@ import * as _ from "lodash";
 @Component({
     selector: 'pagination',
     template: `
-        <nav aria-label="pagination">
+        <nav aria-label="pagination" *ngIf="totalPages > 1">
             <ul class="pagination">
                 <li class="page-item" [ngClass]="{'disabled': page == 1}">
                     <a class="page-link" tabindex="-1" href="#" (click)="setPage(page - 1, $event)">

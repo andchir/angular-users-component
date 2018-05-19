@@ -10,12 +10,20 @@ import {User} from './models/user.model';
 export class UsersComponent implements OnInit {
 
     data: User[] = [];
+    filteredData: User[] = [];
     items: User[] = [];
     pageOptions = {
         page: 1,
         totalItems: 0,
         pageSize: 10
     };
+    filters = {
+        lastName: '',
+        phone: '',
+        city: '',
+        dateOfBirth: ''
+    };
+    filtersTimer: any;
 
     constructor(
         private dataService: UsersService
@@ -34,6 +42,7 @@ export class UsersComponent implements OnInit {
                 this.data = res.results;
                 this.pageOptions.page = res.info.page;
                 this.pageOptions.totalItems = res.info.results;
+                this.filterItems(this.data);
                 this.loadItems();
             });
     }
@@ -41,14 +50,10 @@ export class UsersComponent implements OnInit {
     /**
      * Load users list
      */
-    // TODO: Always load from server (modify server side)
     loadItems(): void {
-
-        console.log(this.pageOptions);
+        this.pageOptions.totalItems = this.filteredData.length;
         const currentPos = (this.pageOptions.page - 1) * this.pageOptions.pageSize;
-
-        this.items = this.data.slice(currentPos, currentPos + this.pageOptions.pageSize);
-
+        this.items = this.filteredData.slice(currentPos, currentPos + this.pageOptions.pageSize);
     }
 
     onChangePageSize(): void {
@@ -59,6 +64,66 @@ export class UsersComponent implements OnInit {
 
     onChangePage(page: number): void {
         this.pageOptions.page = page;
+        this.loadItems();
+    }
+
+    /**
+     * Filter items
+     */
+    filterItems(items: User[]): void {
+        this.filteredData = [];
+        items.forEach((item) => {
+            if (this.filtersValidation(item)) {
+                this.filteredData.push(item);
+            }
+        });
+    }
+
+    /**
+     * Validation by filter
+     * @param item
+     * @returns {boolean}
+     */
+    filtersValidation(item: User): boolean {
+        let filterValue, result = true;
+        for (let name in this.filters) {
+            if (this.filters.hasOwnProperty(name)) {
+                filterValue = this.filters[name];
+                if (!filterValue) {
+                    continue;
+                }
+                switch (name) {
+                    case 'lastName':
+                    case 'phone':
+                    case 'city':
+                        result = (new RegExp(`^${filterValue}`, 'i')).test(User.getValueForFilter(name, item));
+                        break;
+                }
+                if (!result) {
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+
+    filtersUpdate(): void {
+        clearTimeout(this.filtersTimer);
+        this.filtersTimer = setTimeout(() => {
+            this.pageOptions.page = 1;
+            this.filterItems(this.data);
+            this.loadItems();
+        }, 700);
+    }
+
+    filtersClear(): void {
+        for (let name in this.filters) {
+            if (this.filters.hasOwnProperty(name)) {
+                this.filters[name] = '';
+            }
+        }
+        this.pageOptions.page = 1;
+        this.filterItems(this.data);
         this.loadItems();
     }
 

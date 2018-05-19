@@ -1,3 +1,6 @@
 
 body { padding: 20px; }
 
+.input-group-prepend-wide .input-group-text { width: 150px; border-right: 0; }
+.input-group-prepend-wide .input-group-text > span { display: block; width: 100%; text-align: center; }
+

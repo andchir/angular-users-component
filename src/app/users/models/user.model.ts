@@ -1,4 +1,24 @@
 export class User {
+
+    static getValueForFilter(filterName: string, item: User): string {
+        let value = '';
+        switch (filterName) {
+            case 'lastName':
+                value = item.name.last;
+                break;
+            case 'phone':
+                value = item.phone;
+                break;
+            case 'city':
+                value = item.location.city;
+                break;
+            case 'dateOfBirth':
+                value = item.dob;
+                break;
+        }
+        return value;
+    }
+
     constructor(
         public id: {
             name: string,
