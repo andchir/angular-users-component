@@ -15,13 +15,11 @@
     <link href="<%= htmlWebpackPlugin.files.css[css] %>" rel="stylesheet">
     <% } %>
 
-    <link rel="stylesheet" href="/css/styles.css">
-
 </head>
 <body>
 
 <div class="container">
-    <app-main>Loading...</app-main>
+    <app-main><div class="spinner"></div></app-main>
 </div>
 
 <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>

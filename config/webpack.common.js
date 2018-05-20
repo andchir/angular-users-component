@@ -10,10 +10,11 @@ module.exports = {
         'polyfills': './src/polyfills.ts',
         'vendor': './src/vendor.ts',
         'app': './src/main.ts',
-        'vendor_styles': [
+        'styles': [
             './node_modules/bootstrap/dist/css/bootstrap.min.css',
             './node_modules/primeng/resources/primeng.min.css',
-            './node_modules/primeng/resources/themes/omega/theme.css'
+            './node_modules/primeng/resources/themes/omega/theme.css',
+            './src/assets/css/styles.css'
         ]
     },
 

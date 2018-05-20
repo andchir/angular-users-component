@@ -120,16 +120,20 @@
     </table>
 </div>
 
-<div class="float-right">
-    <select class="form-control" [(ngModel)]="pageOptions.pageSize" (ngModelChange)="onChangePageSize()">
-        <option value="10">10</option>
-        <option value="20">20</option>
-        <option value="30">30</option>
-    </select>
-</div>
+<div class="mb-3">
+    <div class="float-right">
+        <select class="form-control" [(ngModel)]="pageOptions.pageSize" (ngModelChange)="onChangePageSize()">
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+        </select>
+    </div>
 
-<pagination
-        [totalItems]="pageOptions.totalItems"
-        [page]="pageOptions.page"
-        [pageSize]="pageOptions.pageSize"
-        (pageChanged)="onChangePage($event)"></pagination>
+    <pagination
+            [totalItems]="pageOptions.totalItems"
+            [page]="pageOptions.page"
+            [pageSize]="pageOptions.pageSize"
+            (pageChanged)="onChangePage($event)"></pagination>
+
+    <div class="clearfix"></div>
+</div>
