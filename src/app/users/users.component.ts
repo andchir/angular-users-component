@@ -18,9 +18,9 @@ export class UsersComponent implements OnInit {
         pageSize: 10
     };
     filters = {
-        lastName: '',
-        phone: '',
-        city: '',
+        lastName: '' as string|null,
+        phone: '' as string|null,
+        city: '' as string|null,
         dateOfBirth: null as Date[]|null
     };
     filtersTimer: any;
@@ -92,7 +92,7 @@ export class UsersComponent implements OnInit {
      * @returns {boolean}
      */
     filtersValidation(item: User): boolean {
-        let filterValue, result = true;
+        let itemValue: any, filterValue: any, result = true;
         for (let name in this.filters) {
             if (this.filters.hasOwnProperty(name)) {
                 filterValue = this.filters[name];
@@ -104,6 +104,14 @@ export class UsersComponent implements OnInit {
                     case 'phone':
                     case 'city':
                         result = (new RegExp(`^${filterValue}`, 'i')).test(User.getValueForFilter(name, item));
+                        break;
+                    case 'dateOfBirth':
+
+                        itemValue = new Date(User.getValueForFilter(name, item));
+                        result = filterValue[0].getTime() < itemValue.getTime();
+                        if (result && filterValue[1] !== null && filterValue[1] instanceof Date) {
+                            result = filterValue[1].getTime() > itemValue.getTime();
+                        }
                         break;
                 }
                 if (!result) {
@@ -120,7 +128,6 @@ export class UsersComponent implements OnInit {
     filtersUpdate(): void {
         clearTimeout(this.filtersTimer);
         this.filtersTimer = setTimeout(() => {
-            console.log('filtersUpdate', this.filters);
             this.pageOptions.page = 1;
             this.filterItems(this.data);
             this.loadItems();
@@ -133,7 +140,7 @@ export class UsersComponent implements OnInit {
     filtersClear(): void {
         for (let name in this.filters) {
             if (this.filters.hasOwnProperty(name)) {
-                this.filters[name] = '';
+                this.filters[name] = null;
             }
         }
         this.pageOptions.page = 1;

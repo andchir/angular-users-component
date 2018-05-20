@@ -57,6 +57,9 @@
                 <p-calendar
                         [(ngModel)]="filters.dateOfBirth"
                         [selectionMode]="'range'"
+                        [monthNavigator]="true"
+                        [yearNavigator]="true"
+                        [yearRange]="'1950:2000'"
                         (ngModelChange)="filtersUpdate()"></p-calendar>
             </div>
 
@@ -72,7 +75,7 @@
 </div>
 
 <div class="table-responsive mb-3">
-    <table class="table">
+    <table class="table table-bordered">
         <thead>
             <tr>
                 <th>ID</th>
@@ -105,7 +108,12 @@
                     {{item.location.city}}
                 </td>
                 <td>
-                    {{item.dob | date}}
+                    {{item.dob | date:'MM/dd/yyyy'}}
+                </td>
+            </tr>
+            <tr *ngIf="!items.length">
+                <td colspan="7" class="bg-light text-center">
+                    Empty.
                 </td>
             </tr>
         </tbody>
