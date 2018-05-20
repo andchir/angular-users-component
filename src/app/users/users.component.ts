@@ -108,9 +108,9 @@ export class UsersComponent implements OnInit {
                     case 'dateOfBirth':
 
                         itemValue = new Date(User.getValueForFilter(name, item));
-                        result = filterValue[0].getTime() < itemValue.getTime();
+                        result = filterValue[0].getTime() <= itemValue.getTime();
                         if (result && filterValue[1] !== null && filterValue[1] instanceof Date) {
-                            result = filterValue[1].getTime() > itemValue.getTime();
+                            result = filterValue[1].getTime() >= itemValue.getTime();
                         }
                         break;
                 }
