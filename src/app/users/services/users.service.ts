@@ -25,7 +25,7 @@ export class UsersService {
      * @returns {Observable<any|any>}
      */
     getItemsList(): Observable<DataList<User>> {
-        const url = `${this.baseUrl}/users.json`;
+        const url = `${this.baseUrl}users.json`;
         return this.http.get<DataList<User>>(url, {headers: this.headers})
             .pipe(
                 catchError(this.handleError<any>('getUsers', []))
