@@ -4,14 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build:dev": "npm run webpack -- --config config/webpack.dev.js --progress --profile",
-    "build:watch": "npm run webpack -- --config config/webpack.dev.js --watch --progress --profile",
-    "build:prod": "npm run webpack -- --config config/webpack.prod.js --progress --profile --bail",
+    "build:dev": "npm run clean:dist && npm run webpack -- --config config/webpack.dev.js --progress --profile",
+    "build:watch": "npm run clean:dist && npm run webpack -- --config config/webpack.dev.js --watch --progress --profile",
+    "build:prod": "npm run clean:dist && npm run webpack -- --config config/webpack.prod.js --progress --profile --bail",
     "server": "npm run webpack-dev-server -- --config config/webpack.dev.js --open --progress --profile --watch --content-base public/",
     "start": "npm run server",
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack-dev-server": "node --max_old_space_size=4096 node_modules/webpack-dev-server/bin/webpack-dev-server.js",
-    "webpack": "node node_modules/webpack/bin/webpack.js"
+    "webpack": "node node_modules/webpack/bin/webpack.js",
+    "clean:dist": "rimraf -- public/dist"
   },
   "repository": {
     "type": "git",
@@ -39,6 +40,7 @@
     "core-js": "^2.5.6",
     "primeng": "^6.0.0-alpha.1",
     "raw-loader": "^0.5.1",
+    "rimraf": "^2.6.2",
     "rxjs": "^6.1.0",
     "systemjs": "^0.21.3",
     "zone.js": "^0.8.26"
